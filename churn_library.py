@@ -466,7 +466,7 @@ def feature_importance_plot(
     # calculate feature importance using shap
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_data)
-    shap.summary_plot(shap_values, X_data, plot_type="bar")
+    shap.summary_plot(shap_values, X_data, plot_type="bar", show=False)
     plt.savefig(f"{pth}/{model.__class__.__name__}_feature_importance.png")
     plt.close()
 
@@ -491,17 +491,17 @@ if __name__ == "__main__":
     print(df.describe())
     # perform the exploratory data analysis
     # and save the figures to the images folder
-    perform_eda(df)
+    # TODO perform_eda(df)
     # perform feature engineering
     X_train, X_test, y_train, y_test = perform_feature_engineering(df, "Churn")
     print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
     # train models
-    rfc, lrc = train_models(X_train, y_train)
+    # TODO rfc, lrc = train_models(X_train, y_train)
     # load models
     rfc = joblib.load("./models/rfc_model.pkl")
     lrc = joblib.load("./models/lrc_model.pkl")
     # test models both with X_train and X_test
-    test_model(X_train, X_test, y_train, y_test, rfc)
-    test_model(X_train, X_test, y_train, y_test, lrc)
+    # TODO test_model(X_train, X_test, y_train, y_test, rfc)
+    # TODO test_model(X_train, X_test, y_train, y_test, lrc)
     # get feature importance plots
     feature_importance_plot(rfc, X_test)
