@@ -9,7 +9,7 @@ Functions:
         import_data: import csv file as pandas dataframe
         add_churn_column: add churn column to dataframe based on Attrition_Flag
         perform_eda: perform exploratory data analysis
-        encoder_helper: helper function to turn each categorical column into a 
+        encoder_helper: helper function to turn each categorical column into a
                         new column with propotion of churn for each category
         perform_feature_engineering: perform feature engineering
         train_models: train and store models
@@ -239,7 +239,8 @@ def encoder_helper(df: pd.DataFrame, response: str = "Churn") -> pd.DataFrame:
                 continue
             # create a new column name for each category
             new_col = col + "_" + response
-            # create a new column with the proportion of churn for each category
+            # create a new column with the proportion of churn for each
+            # category
             col_groups = df[[col, response]].groupby(col).mean()[response]
             df[new_col] = [col_groups.loc[val] for val in df[col]]
         except KeyError:
@@ -317,7 +318,8 @@ def train_models(
     # grid search
     rfc = RandomForestClassifier(random_state=const.RAND_STATE)
     # Use a different solver if the default 'lbfgs' fails to converge
-    # Reference: https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+    # Reference:
+    # https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
     lrc = LogisticRegression(
         solver=const.LR_SOLVER, max_iter=const.LR_MAX_ITER
     )
